@@ -174,6 +174,14 @@ where det.continent is not null
 
 
 
+create view PercentDeathGlobal as
+Select sum(new_cases) as TotalCases, sum(new_deaths) as TotalDeaths, sum(new_deaths)/sum(new_cases)*100 as DeathRate 
+from [COVID Project]..CovidDeaths
+Where continent is not null 
+--group by date
+--order by 1,2;
+
+
 create view PercentDeathContinent  as
 Select continent, sum(population) TotalPopulation, sum(new_deaths) as TotalDeathCount, sum(new_deaths)/sum(population)*100 as DeathPercentage 
 From [COVID Project]..CovidDeaths
