@@ -201,9 +201,15 @@ group by Location, population
 
 
 create view PercentInfectedCountry as
-Select Location, population, max(total_cases) as HighestInfectionCount, max((total_cases/population))*100 as HighestInfectedPercentage
+Select Location, population, max(total_cases) as HighestInfectionCount, max((total_cases/population))*100 as InfectedPercentage
 From [COVID Project]..CovidDeaths
 Where continent is not null 
 group by Location, population
---order by HighestInfectedPercentage desc;
+--order by InfectedPercentage desc;
+
+create view PercentPopulationInfected as
+Select Location, Population,date, MAX(total_cases) as HighestInfectionCount,  Max((total_cases/population))*100 as PercentPopulationInfected
+From [COVID Project]..CovidDeaths
+Group by Location, Population, date
+--order by PercentPopulationInfected desc
 
